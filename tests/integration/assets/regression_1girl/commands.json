@@ -1,0 +1,23 @@
+{
+  "check": [
+    "ANIMA_RUN_INTEGRATION=1",
+    "uv",
+    "run",
+    "pytest",
+    "tests/integration/test_regression_1girl.py",
+    "-m",
+    "integration",
+    "-s"
+  ],
+  "update_baseline": [
+    "ANIMA_RUN_INTEGRATION=1",
+    "ANIMA_UPDATE_BASELINE=1",
+    "uv",
+    "run",
+    "pytest",
+    "tests/integration/test_regression_1girl.py",
+    "-m",
+    "integration",
+    "-s"
+  ]
+}

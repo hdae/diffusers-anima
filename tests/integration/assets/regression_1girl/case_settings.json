@@ -1,0 +1,35 @@
+{
+  "common": {
+    "width": 768,
+    "height": 1152,
+    "num_inference_steps": 20,
+    "guidance_scale": 4.0,
+    "generator_seed": 1,
+    "sampler": "euler_a_rf",
+    "sigma_schedule": "normal",
+    "beta_alpha": 0.6,
+    "beta_beta": 0.6,
+    "eta": 1.0,
+    "s_noise": 1.0,
+    "cfg_batch_mode": "split",
+    "negative_prompt": "worst quality, low quality, score_1, score_2, score_3, monochrome, bad anatomy, bad hands, text, error, missing fingers, extra digit, fewer digits, cropped, normal quality, jpeg artifacts, nsfw, nude, nipples, areola, cleavage, breasts, large breasts, suggestive, erotic, explicit"
+  },
+  "text2img": {
+    "prompt": "masterpiece, best quality, score 9, score 8, newest, absurdres, very aesthetic, highres, 1girl, solo, long hair, blue eyes, white blouse, pleated skirt, looking at viewer, crying, tears, sad expression"
+  },
+  "img2img": {
+    "prompt": "masterpiece, best quality, score 9, score 8, newest, absurdres, very aesthetic, highres, 1girl, solo, long hair, blue eyes, white blouse, pleated skirt, looking at viewer, gentle smile, smiling",
+    "strength": 0.5
+  },
+  "inpaint": {
+    "prompt": "masterpiece, best quality, score 9, score 8, newest, absurdres, very aesthetic, highres, 1girl, solo, long hair, blue eyes, white blouse, pleated skirt, looking at viewer, surprised expression, shocked, wide eyes, open mouth",
+    "strength": 0.75
+  },
+  "inpaint_mask": {
+    "shape": "ellipse",
+    "x0": 220,
+    "y0": 180,
+    "x1": 548,
+    "y1": 560
+  }
+}
