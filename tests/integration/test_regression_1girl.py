@@ -218,15 +218,11 @@ def _assert_baselines_exist() -> None:
         joined = ", ".join(missing)
         raise FileNotFoundError(
             "Regression baselines are missing. "
-            "Generate them with ANIMA_RUN_INTEGRATION=1 ANIMA_UPDATE_BASELINE=1."
+            "Generate them with ANIMA_UPDATE_BASELINE=1."
             f" Missing: {joined}"
         )
 
 
-@pytest.mark.skipif(
-    not _env_flag("ANIMA_RUN_INTEGRATION"),
-    reason="Set ANIMA_RUN_INTEGRATION=1 to run integration regression tests.",
-)
 def test_regression_1girl_baselines() -> None:
     update_baseline = _env_flag("ANIMA_UPDATE_BASELINE")
     max_abs_threshold = int(os.getenv("ANIMA_MAX_ABS_THRESHOLD", "0"))

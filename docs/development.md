@@ -13,8 +13,9 @@ uv sync
 |---|---|
 | `uv run ruff format src/` | Auto-format source files |
 | `uv run ruff check src/` | Lint source files |
-| `uv run pytest tests/unit/ -q` | Run unit tests |
+| `uv run pytest tests/unit/ -q` | Run unit tests (no GPU required) |
 | `uv run pytest tests/unit/ -x -q` | Run unit tests, stop on first failure |
+| `uv run pytest` | Run all tests including integration (GPU required) |
 
 ## Unit Tests
 
@@ -35,27 +36,26 @@ Tests live in `tests/unit/`. They cover:
 ## Integration Regression Tests
 
 The integration tests load the full Anima model and run inference. A GPU and
-model weights are required.
+model weights are required. They run automatically as part of `uv run pytest`.
+
+To run integration tests in isolation:
 
 ```bash
-ANIMA_RUN_INTEGRATION=1 ANIMA_VAE_SLICING=1 \
-  uv run pytest tests/integration/test_regression_1girl.py -m integration -s
+ANIMA_VAE_SLICING=1 uv run pytest tests/integration/ -s
 ```
 
 To update the stored baselines after an intentional output change:
 
 ```bash
-ANIMA_RUN_INTEGRATION=1 ANIMA_UPDATE_BASELINE=1 ANIMA_VAE_SLICING=1 \
-  uv run pytest tests/integration/test_regression_1girl.py -m integration -s
+ANIMA_UPDATE_BASELINE=1 ANIMA_VAE_SLICING=1 uv run pytest tests/integration/ -s
 ```
 
 Set `ANIMA_PRETRAINED_MODEL_PATH` to a local path to avoid downloading from
 HuggingFace:
 
 ```bash
-ANIMA_RUN_INTEGRATION=1 ANIMA_VAE_SLICING=1 \
-  ANIMA_PRETRAINED_MODEL_PATH=./converted_pipeline \
-  uv run pytest tests/integration/test_regression_1girl.py -m integration -s
+ANIMA_VAE_SLICING=1 ANIMA_PRETRAINED_MODEL_PATH=./converted_pipeline \
+  uv run pytest tests/integration/ -s
 ```
 
 If you regenerate baselines, include a justification in the commit message
