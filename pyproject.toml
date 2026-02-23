@@ -3,6 +3,7 @@ name = "diffusers-anima"
 version = "0.1.0"
 description = "Anima image generation with Diffusers custom pipeline loading"
 readme = "README.md"
+license = "Apache-2.0"
 requires-python = ">=3.12"
 dependencies = [
     "accelerate>=1.12.0",

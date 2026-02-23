@@ -94,6 +94,16 @@ result = pipe(
 )
 ```
 
+## Model
+
+Model weights are hosted on HuggingFace: [hdae/diffusers-anima-preview](https://huggingface.co/hdae/diffusers-anima-preview)
+
+The weights are based on [circlestone-labs/Anima](https://huggingface.co/circlestone-labs/Anima) and are subject to the
+[CircleStone Labs Non-Commercial License](https://huggingface.co/circlestone-labs/Anima/blob/main/LICENSE.md).
+**The model weights may not be used for commercial purposes.** Generated outputs may be used for any purpose.
+
+This code library (`diffusers-anima`) is separately licensed under Apache 2.0.
+
 ## Documentation
 
 | Document | Description |
