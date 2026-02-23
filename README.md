@@ -5,7 +5,13 @@
 ## Install
 
 ```bash
-uv sync
+pip install git+https://github.com/hdae/diffusers-anima.git
+```
+
+Or with [uv](https://docs.astral.sh/uv/):
+
+```bash
+uv add git+https://github.com/hdae/diffusers-anima.git
 ```
 
 ## Quick Start
