@@ -21,3 +21,10 @@ outputs/
 
 # Internal notes
 .brain/
+
+# Model weights
+*.safetensors
+*.ckpt
+*.pt
+*.pth
+*.bin
