@@ -394,6 +394,39 @@ def _strip_model_prefix(
     return dict(state_dict)
 
 
+# ComfyUI and other tools save Anima checkpoints with outer wrappers such as
+# `model.diffusion_model.<orig>`. Strip any combination of these iteratively
+# before feeding the state dict to the Anima key-mapping logic.
+_TRANSFORMER_STATE_DICT_WRAPPING_PREFIXES: tuple[str, ...] = (
+    "net.",
+    "model.",
+    "diffusion_model.",
+)
+
+
+def _strip_wrapping_prefixes(
+    state_dict: dict[str, torch.Tensor],
+    prefixes: tuple[str, ...] = _TRANSFORMER_STATE_DICT_WRAPPING_PREFIXES,
+) -> dict[str, torch.Tensor]:
+    """Remove outer wrapping prefixes iteratively from every key.
+
+    A prefix is only removed when **all** keys share it — so unrelated namespaces
+    never get silently merged. Loops until no configured prefix is common, which
+    handles composite wrappers like ``model.diffusion_model.`` in one call.
+    """
+    current = dict(state_dict)
+    while current:
+        for prefix in prefixes:
+            if all(key.startswith(prefix) for key in current):
+                current = {
+                    key[len(prefix):]: value for key, value in current.items()
+                }
+                break
+        else:
+            break
+    return current
+
+
 def load_vae_single_file(
     file_path: str, device: str, dtype: torch.dtype
 ) -> AutoencoderKLQwenImage:
@@ -463,7 +496,7 @@ def load_transformer_native(
         raise FileNotFoundError(f"Anima checkpoint not found: {model_path}")
 
     state_dict = load_file(model_path, device="cpu")
-    state_dict = _strip_net_prefix(state_dict)
+    state_dict = _strip_wrapping_prefixes(state_dict)
     core_state_dict, llm_adapter_state_dict = _convert_anima_state_dict_to_diffusers(
         state_dict
     )
