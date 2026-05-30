@@ -1,5 +1,14 @@
 # diffusers-anima
 
+> [!IMPORTANT]
+> **You don't need this repository anymore — Diffusers now supports Anima natively!**
+> This was an unofficial, stopgap implementation from before Anima had native support.
+>
+> Anima is now properly supported in 🤗 Diffusers via
+> [huggingface/diffusers#13732](https://github.com/huggingface/diffusers/pull/13732) —
+> a separate, independent implementation unrelated to this repo. Just use the official
+> `diffusers` package instead. This repository is archived (read-only).
+
 `diffusers-anima` provides an Anima pipeline implementation designed to align with [Diffusers](https://github.com/huggingface/diffusers) patterns.
 
 ## Install
